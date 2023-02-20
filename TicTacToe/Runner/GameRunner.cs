@@ -187,13 +187,14 @@ namespace TicTacToe.Runner
             if (playerInput == YesNoOption.Yes)
             {
                 _board = new GameBoard(_board.RowSize);
-                if(!_playerOne.Human) _playerOne.SetPlayerBackToHuman();
-                else _playerTwo.SetPlayerBackToHuman();
+                SetComputerBackToHuman();
                 ShowMainMenu();
             }
 
             GameRunnerHelpers.Exit();
         }
+
+        private void SetComputerBackToHuman() => (_playerOne.Human ? _playerTwo : _playerOne).SetPlayerBackToHuman();
 
         private string[] GetAvailableCells()
         {
