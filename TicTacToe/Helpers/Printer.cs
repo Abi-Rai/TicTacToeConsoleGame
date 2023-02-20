@@ -237,6 +237,7 @@ namespace TicTacToe.Helpers
         public void DisplayPlayAgainstComputerMessage()
         {
             SetForegroundColor(ConsoleColor.Magenta);
+            ClearConsole();
             string message = $"""
 
                 Would you like to play against Computer?
@@ -262,6 +263,8 @@ namespace TicTacToe.Helpers
         {
             SetForegroundColor(ConsoleColor.Green);
             string message = $"""
+
+
 
             Do you want to play first?
             1) Yes
