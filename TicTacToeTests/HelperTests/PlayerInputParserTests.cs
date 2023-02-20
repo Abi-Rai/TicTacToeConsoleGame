@@ -16,7 +16,7 @@ public class PlayerInputParserTests
         //Arrange
         string[] availableCells = new string[] { "1", "2", "8", "3", "6" };
         //Act 
-        bool result = PlayerInputParser.IsValidInput(playerInput, availableCells);
+        bool result = StaticInputParser.IsValidInput(playerInput, availableCells);
         //Assert
         result.Should().Be(true);
     }
@@ -34,7 +34,7 @@ public class PlayerInputParserTests
     {
         string[] availableCells = new string[] { "1", "2" };
         //Act 
-        bool result = PlayerInputParser.IsValidInput(playerInput, availableCells);
+        bool result = StaticInputParser.IsValidInput(playerInput, availableCells);
         //Assert
         result.Should().Be(false);
     }
@@ -51,7 +51,7 @@ public class PlayerInputParserTests
         char expected = char.Parse(playerInput.Trim());
 
         //Act 
-        char result = PlayerInputParser.ParseInputToChar(playerInput);
+        char result = StaticInputParser.ParseInputToChar(playerInput);
         //Assert
         result.Should().Be(expected);
     }
@@ -67,7 +67,7 @@ public class PlayerInputParserTests
     public void GivenAWrongFormatInputString_ThenThrowInvalidCastException(string invalidInput)
     {
         //Act 
-        Action act = () => PlayerInputParser.ParseInputToChar(invalidInput);
+        Action act = () => StaticInputParser.ParseInputToChar(invalidInput);
         //Assert
         act.Should().Throw<InvalidCastException>();
 
@@ -80,7 +80,7 @@ public class PlayerInputParserTests
     public void GivenAnOutOfBoundsString_ThenThrowOutOfRangeException(string invalidInput)
     {
         //Act 
-        Action act = () => PlayerInputParser.ParseInputToChar(invalidInput);
+        Action act = () => StaticInputParser.ParseInputToChar(invalidInput);
         //Assert
         act.Should().Throw<ArgumentOutOfRangeException>();
 
@@ -101,7 +101,7 @@ public class PlayerInputParserTests
         foreach (var inputKey in inputKeys)
         {
             //Act 
-            var result = PlayerInputParser.IsValidKey(inputKey, validKeys);
+            var result = StaticInputParser.IsValidKey(inputKey, validKeys);
 
             //Assert
             result.Should().BeTrue();
@@ -122,7 +122,7 @@ public class PlayerInputParserTests
         foreach (var inputKey in inputKeys)
         {
             //Act 
-            var result = PlayerInputParser.IsValidKey(inputKey, validKeys);
+            var result = StaticInputParser.IsValidKey(inputKey, validKeys);
 
             //Assert
             result.Should().BeFalse();
@@ -141,7 +141,7 @@ public class PlayerInputParserTests
         string playerOneMarker = "X";
         string playerTwoMarker = "O";
         //Act 
-        var result = PlayerInputParser.IsValidMarkerInput(validPlayerInput,playerOneMarker,playerTwoMarker);
+        var result = StaticInputParser.IsValidMarkerInput(validPlayerInput,playerOneMarker,playerTwoMarker);
 
         //Assert
         result.Should().BeTrue();
@@ -159,7 +159,7 @@ public class PlayerInputParserTests
         string playerOneMarker = "X";
         string playerTwoMarker = "O";
         //Act 
-        var result = PlayerInputParser.IsValidMarkerInput(validPlayerInput, playerOneMarker, playerTwoMarker);
+        var result = StaticInputParser.IsValidMarkerInput(validPlayerInput, playerOneMarker, playerTwoMarker);
 
         //Assert
         result.Should().BeFalse();

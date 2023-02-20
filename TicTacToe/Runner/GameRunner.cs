@@ -88,7 +88,7 @@ namespace TicTacToe.Runner
         private string WaitplayerValidMarker()
         {
             var playerInput = StaticPrinter.ReadLine();
-            while (PlayerInputParser.IsValidMarkerInput(playerInput, _playerOne.Marker, _playerTwo.Marker) == false)
+            while (StaticInputParser.IsValidMarkerInput(playerInput, _playerOne.Marker, _playerTwo.Marker) == false)
             {
                 StaticPrinter.DisplayInvalidMarkerMessage();
                 playerInput = StaticPrinter.ReadLine();
@@ -206,7 +206,7 @@ namespace TicTacToe.Runner
         private string WaitPlayerValidName()
         {
             var playerInput = StaticPrinter.ReadLine();
-            while (PlayerInputParser.IsValidNameInput(playerInput, _playerOne.Name, _playerTwo.Name) == false)
+            while (StaticInputParser.IsValidNameInput(playerInput, _playerOne.Name, _playerTwo.Name) == false)
             {
                 StaticPrinter.DisplayInvalidNameMessage();
                 playerInput = StaticPrinter.ReadLine();

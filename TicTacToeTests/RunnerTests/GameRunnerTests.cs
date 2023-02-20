@@ -45,7 +45,7 @@ namespace TicTacToeTests.RunnerTests
             StaticPrinter._printer = _mockPrinter.Object;
             _mockInputParser.Setup(ip => ip.IsValidKey(playerInput, validKeys))
                             .Returns(true);
-            PlayerInputParser._inputParser = _mockInputParser.Object;
+            StaticInputParser._inputParser = _mockInputParser.Object;
 
             char expected = keyChar;
 
@@ -87,7 +87,7 @@ namespace TicTacToeTests.RunnerTests
                             {
                                 return key.KeyChar == expected;
                             });
-            PlayerInputParser._inputParser = _mockInputParser.Object;
+            StaticInputParser._inputParser = _mockInputParser.Object;
 
             // Act 
             var result = GameRunnerHelpers.WaitPlayerValidKeyInput('4', '6');
@@ -116,7 +116,7 @@ namespace TicTacToeTests.RunnerTests
                                 return cells.Contains(s);
                             });
 
-            PlayerInputParser._inputParser = _mockInputParser.Object;
+            StaticInputParser._inputParser = _mockInputParser.Object;
             //Act 
             var result = GameRunnerHelpers.WaitPlayerValidStringInput(availableCells);
 

@@ -32,7 +32,7 @@ internal class GameRunnerHelpers
         char[] validKeys = GetValidKeys(from, to);
         StaticPrinter.DisplayValidKeys(validKeys);
         ConsoleKeyInfo keyPressed = StaticPrinter.ReadKey();
-        while (PlayerInputParser.IsValidKey(keyPressed, validKeys) == false)
+        while (StaticInputParser.IsValidKey(keyPressed, validKeys) == false)
         {
             StaticPrinter.DisplayInvalidKeyMessage(validKeys);
             keyPressed = StaticPrinter.ReadKey();
@@ -42,7 +42,7 @@ internal class GameRunnerHelpers
     internal static string WaitPlayerValidStringInput(string[] availableCells)
     {
         var playerInput = StaticPrinter.ReadLine();
-        while (PlayerInputParser.IsValidInput(playerInput, availableCells) == false)
+        while (StaticInputParser.IsValidInput(playerInput, availableCells) == false)
         {
             StaticPrinter.DisplayInvalidStringMessage(availableCells);
             playerInput = StaticPrinter.ReadLine();
