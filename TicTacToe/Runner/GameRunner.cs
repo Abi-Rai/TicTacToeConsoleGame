@@ -8,7 +8,7 @@ using TicTacToe.Runner.Utils;
 namespace TicTacToe.Runner
 {
 
-    public partial class GameRunner
+    public class GameRunner
     {
         private GameBoard _board;
         private readonly Player _playerOne;
