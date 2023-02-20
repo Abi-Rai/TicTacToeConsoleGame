@@ -5,7 +5,7 @@ namespace TicTacToeTests.GameTests
 {
     public class GameBoardTests
     {
-        private char[] _drawSequence = new char[] { '1', '2', '3', '4', '6', '5', '7', '9', '8' };
+        private readonly char[] _drawSequence = new char[] { '1', '2', '3', '4', '6', '5', '7', '9', '8' };
         private readonly GameBoard _gameBoard;
         public GameBoardTests()
         {

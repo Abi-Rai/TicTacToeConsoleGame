@@ -76,7 +76,7 @@ namespace TicTacToe.Helpers
                 """;
             WriteLine(settingChange);
         }
-        private string GetSettings(GameBoard board, Player playerOne, Player playerTwo)
+        private static string GetSettings(GameBoard board, Player playerOne, Player playerTwo)
         {
             string message = $"""
                 Your current settings are
