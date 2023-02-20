@@ -5,6 +5,7 @@
         public string Name { get; private set; }
         public string Marker { get; private set; }
         public bool Human { get; private set; }
+        private static int _playerNumberIncrementer = 1;
         public Player(string name, string marker, bool human = true)
         {
             Name = name;
@@ -23,6 +24,11 @@
         {
             Human = false;
             Name = "COMPUTER";
+        }
+        public void SetPlayerBackToHuman()
+        {
+            Human = true;
+            Name = $"Reborn_{_playerNumberIncrementer++}";
         }
     }
 }
