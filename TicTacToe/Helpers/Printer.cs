@@ -1,6 +1,8 @@
 ﻿using System.Text;
 using TicTacToe.CustomExtensions;
 using TicTacToe.Game.Board;
+using TicTacToe.Helpers.Interfaces;
+
 namespace TicTacToe.Helpers
 {
     public class Printer : IPrinter

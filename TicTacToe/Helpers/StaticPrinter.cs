@@ -1,10 +1,11 @@
 ﻿using TicTacToe.Game.Board;
+using TicTacToe.Helpers.Interfaces;
 
 namespace TicTacToe.Helpers
 {
     public static class StaticPrinter
     {
-        private static readonly IPrinter _printer = new Printer();
+        public static IPrinter _printer = new Printer();
         public static void Write(string text) => _printer.Write(text);
         public static void WriteLine() => _printer.WriteLine();
         public static void WriteLine(string text) => _printer.WriteLine(text);

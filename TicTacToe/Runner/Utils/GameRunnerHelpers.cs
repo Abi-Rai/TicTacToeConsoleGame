@@ -1,7 +1,9 @@
-﻿using TicTacToe.Helpers;
+﻿using System.Runtime.CompilerServices;
+using TicTacToe.Helpers;
 
+[assembly: InternalsVisibleTo("TicTacToeTests")]
 namespace TicTacToe.Runner.Utils;
-internal static class GameRunnerHelpers
+internal class GameRunnerHelpers
 {
     internal static void Exit()
     {

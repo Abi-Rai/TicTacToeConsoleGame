@@ -1,6 +1,6 @@
 ﻿using TicTacToe.Game.Board;
 
-namespace TicTacToe.Helpers
+namespace TicTacToe.Helpers.Interfaces
 {
     public interface IPrinter
     {

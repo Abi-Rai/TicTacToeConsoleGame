@@ -131,7 +131,7 @@ namespace TicTacToe.Runner
                     StaticPrinter.DisplayWinnerMessage(currentPlayer, _board);
                     gameNotEnd = false;
                 }
-                else if (CheckDraw()) 
+                else if (CheckDraw())
                 {
                     StaticPrinter.DisplayDrawMessage(_board);
                     gameNotEnd = false;
@@ -182,7 +182,7 @@ namespace TicTacToe.Runner
         private void ShowRestartOption()
         {
             StaticPrinter.DisplayRestartGameMessage();
-            
+
             var playerInput = (YesNoOption)GameRunnerHelpers.WaitPlayerValidKeyInput((char)YesNoOption.Yes, (char)YesNoOption.No);
             if (playerInput == YesNoOption.Yes)
             {
