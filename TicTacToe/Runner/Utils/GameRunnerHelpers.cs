@@ -5,7 +5,7 @@ internal static class GameRunnerHelpers
 {
     internal static void Exit()
     {
-        Printer.DisplayExitMessage();
+        StaticPrinter.DisplayExitMessage();
     }
 
     internal static string GetComputersMove(string[] availableCells)
@@ -28,22 +28,22 @@ internal static class GameRunnerHelpers
     internal static char WaitPlayerValidKeyInput(char from, char to)
     {
         char[] validKeys = GetValidKeys(from, to);
-        Printer.DisplayValidKeys(validKeys);
-        ConsoleKeyInfo keyPressed = Printer.ReadKey();
+        StaticPrinter.DisplayValidKeys(validKeys);
+        ConsoleKeyInfo keyPressed = StaticPrinter.ReadKey();
         while (PlayerInputParser.IsValidKey(keyPressed, validKeys) == false)
         {
-            Printer.DisplayInvalidKeyMessage(validKeys);
-            keyPressed = Printer.ReadKey();
+            StaticPrinter.DisplayInvalidKeyMessage(validKeys);
+            keyPressed = StaticPrinter.ReadKey();
         }
         return keyPressed.KeyChar;
     }
     internal static string WaitPlayerValidStringInput(string[] availableCells)
     {
-        var playerInput = Printer.ReadLine();
+        var playerInput = StaticPrinter.ReadLine();
         while (PlayerInputParser.IsValidInput(playerInput, availableCells) == false)
         {
-            Printer.DisplayInvalidStringMessage(availableCells);
-            playerInput = Printer.ReadLine();
+            StaticPrinter.DisplayInvalidStringMessage(availableCells);
+            playerInput = StaticPrinter.ReadLine();
         }
         return playerInput!;
     }

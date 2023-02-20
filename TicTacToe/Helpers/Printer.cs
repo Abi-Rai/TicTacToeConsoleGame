@@ -1,36 +1,37 @@
 ﻿using System.Text;
+using TicTacToe.CustomExtensions;
 using TicTacToe.Game.Board;
-using TicTacToe.Game.Player;
-
 namespace TicTacToe.Helpers
 {
-    public static class Printer
+    public class Printer : IPrinter
     {
-        public static void Write(string text)
+        public void Write(string text)
         {
             Console.Write(text);
         }
-        public static void WriteLine()
+        public void WriteLine()
         {
             Console.WriteLine();
         }
-        public static void WriteLine(string text)
+        public void WriteLine(string text)
         {
             Console.WriteLine(text);
         }
-        public static string? ReadLine()
+        public string? ReadLine()
         {
             return Console.ReadLine();
         }
-        public static ConsoleKeyInfo ReadKey()
+        public ConsoleKeyInfo ReadKey()
         {
             return Console.ReadKey();
         }
-        public static void SetForegroundColor(ConsoleColor color)
+        public void SetForegroundColor(ConsoleColor color)
         {
             Console.ForegroundColor = color;
         }
-        public static void DisplayValidKeys(char[] validKeys)
+        private static void ClearConsole() => Console.Clear();
+
+        public void DisplayValidKeys(char[] validKeys)
         {
             SetForegroundColor(ConsoleColor.Cyan);
             Console.WriteLine($"""
@@ -40,7 +41,7 @@ namespace TicTacToe.Helpers
                 """);
             SetForegroundColor(ConsoleColor.White);
         }
-        public static void Greet(GameBoard board, Player playerOne, Player playerTwo)
+        public void Greet(GameBoard board, Player playerOne, Player playerTwo)
         {
             ClearConsole();
             SetForegroundColor(ConsoleColor.White);
@@ -58,7 +59,7 @@ namespace TicTacToe.Helpers
                 """;
             WriteLine(message);
         }
-        public static void DisplaySettings(GameBoard board, Player playerOne, Player playerTwo)
+        public void DisplaySettings(GameBoard board, Player playerOne, Player playerTwo)
         {
             ClearConsole();
             SetForegroundColor(ConsoleColor.Yellow);
@@ -75,7 +76,7 @@ namespace TicTacToe.Helpers
                 """;
             WriteLine(settingChange);
         }
-        private static string GetSettings(GameBoard board, Player playerOne, Player playerTwo)
+        private string GetSettings(GameBoard board, Player playerOne, Player playerTwo)
         {
             string message = $"""
                 Your current settings are
@@ -92,7 +93,7 @@ namespace TicTacToe.Helpers
                 """;
             return message;
         }
-        public static void DrawBoard(GameBoard board)
+        public void DrawBoard(GameBoard board)
         {
             Cell[] boardCells = board.Board;
             SetForegroundColor(ConsoleColor.White);
@@ -122,7 +123,7 @@ namespace TicTacToe.Helpers
                 ShowLastMove(board);
             }
         }
-        private static void ShowLastMove(GameBoard board)
+        private void ShowLastMove(GameBoard board)
         {
             SetForegroundColor(ConsoleColor.Green);
             WriteLine($"LastRound: {board.MoveHistory.Peek()}");
@@ -130,18 +131,9 @@ namespace TicTacToe.Helpers
             WriteLine("\n-----------------------------------------------------------");
         }
 
-        private static void ClearConsole() => Console.Clear();
+        public void DisplayExitMessage() => WriteLine("\nThank you for playing Tic-Tac-Toe\n");
 
-        private static string PadCenterExtension(this string str, int width, char padChar = ' ')
-        {
-            if (width <= str.Length) return str;
-            int padding = width - str.Length;
-            return str.PadLeft(str.Length + padding / 2, padChar)
-                      .PadRight(width, padChar);
-        }
-        public static void DisplayExitMessage() => WriteLine("\nThank you for playing Tic-Tac-Toe\n");
-
-        public static void DisplayBoardOptions(GameBoard board)
+        public void DisplayBoardOptions(GameBoard board)
         {
             ClearConsole();
             string message = $"""
@@ -159,12 +151,12 @@ namespace TicTacToe.Helpers
             WriteLine(message);
         }
 
-        public static void DisplayNameChooseMessage(Player player)
+        public void DisplayNameChooseMessage(Player player)
         {
             WriteLine($"\nPlease choose a new name for => {player.Name}\n**New name cannot be empty or an exisiting name");
         }
 
-        public static void DisplayMarkerChooser(Player player)
+        public void DisplayMarkerChooser(Player player)
         {
             string message = $"""
 
@@ -174,7 +166,7 @@ namespace TicTacToe.Helpers
             WriteLine(message);
         }
 
-        public static void DisplayAvailableCells(string[] availableCells)
+        public void DisplayAvailableCells(string[] availableCells)
         {
             string message = $"""
                 please choose from one of these available cells, by typing in the number and pressing enter:-
@@ -183,7 +175,7 @@ namespace TicTacToe.Helpers
             WriteLine(message);
         }
 
-        public static void DisplayInvalidStringMessage(string[] availableCells)
+        public void DisplayInvalidStringMessage(string[] availableCells)
         {
             string message = $"""
                 Invalid input! 
@@ -193,15 +185,15 @@ namespace TicTacToe.Helpers
             WriteLine(message);
             DisplayAvailableCells(availableCells);
         }
-        public static void DisplayInvalidMarkerMessage() => WriteLine(" Invalid input! New marker can only be 1 character long and cannot be the same as current players markers");
-        public static void DisplayInvalidKeyMessage(char[] validKeys)
+        public void DisplayInvalidMarkerMessage() => WriteLine(" Invalid input! New marker can only be 1 character long and cannot be the same as current players markers");
+        public void DisplayInvalidKeyMessage(char[] validKeys)
         {
             WriteLine(" Incorrect key pressed!");
             DisplayValidKeys(validKeys);
         }
-        public static void DisplayInvalidNameMessage() => WriteLine(" Invalid input! Name cannot be empty.");
+        public void DisplayInvalidNameMessage() => WriteLine(" Invalid input! Name cannot be empty.");
 
-        public static void DisplayWinnerMessage(Player currentPlayer, GameBoard board)
+        public void DisplayWinnerMessage(Player currentPlayer, GameBoard board)
         {
             DrawBoard(board);
             SetForegroundColor(ConsoleColor.Green);
@@ -212,7 +204,7 @@ namespace TicTacToe.Helpers
             WriteLine(message);
         }
 
-        public static void DisplayDrawMessage(GameBoard board)
+        public void DisplayDrawMessage(GameBoard board)
         {
             SetForegroundColor(ConsoleColor.Green);
             string message = $"""
@@ -220,7 +212,7 @@ namespace TicTacToe.Helpers
                 """;
             WriteLine(message);
         }
-        public static void DisplayRestartGameMessage()
+        public void DisplayRestartGameMessage()
         {
             SetForegroundColor(ConsoleColor.White);
             string message = $"""
@@ -233,7 +225,7 @@ namespace TicTacToe.Helpers
                 """;
             WriteLine(message);
         }
-        public static void DisplayCurrentPlayerTurn(Player player)
+        public void DisplayCurrentPlayerTurn(Player player)
         {
             SetForegroundColor(ConsoleColor.Magenta);
             string message = $"""
@@ -242,7 +234,7 @@ namespace TicTacToe.Helpers
             WriteLine(message);
             SetForegroundColor(ConsoleColor.White);
         }
-        public static void DisplayPlayAgainstComputerMessage()
+        public void DisplayPlayAgainstComputerMessage()
         {
             SetForegroundColor(ConsoleColor.Magenta);
             string message = $"""
@@ -255,7 +247,7 @@ namespace TicTacToe.Helpers
             WriteLine(message);
             SetForegroundColor(ConsoleColor.White);
         }
-        public static void DisplayPlayerMove(Player player, string playerInput)
+        public void DisplayPlayerMove(Player player, string playerInput)
         {
             SetForegroundColor(ConsoleColor.Green);
             string message = $"""
@@ -266,7 +258,7 @@ namespace TicTacToe.Helpers
             WriteLine(message);
             SetForegroundColor(ConsoleColor.White);
         }
-        public static void DisplayFirstOrSecondMessage()
+        public void DisplayFirstOrSecondMessage()
         {
             SetForegroundColor(ConsoleColor.Green);
             string message = $"""

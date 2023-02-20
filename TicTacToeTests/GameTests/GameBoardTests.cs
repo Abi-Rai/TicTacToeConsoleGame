@@ -1,6 +1,5 @@
 ﻿using FluentAssertions;
 using TicTacToe.Game.Board;
-using TicTacToe.Game.Player;
 
 namespace TicTacToeTests.GameTests
 {

@@ -15,7 +15,7 @@ public class PrinterTests
         string expected = string.Format("Hello John{0}", Environment.NewLine);
 
         //Act
-        Printer.WriteLine(textToDisplay);
+        StaticPrinter.WriteLine(textToDisplay);
 
         //Assert
         expected.Should<string>().Be(stringWriter.ToString());
@@ -29,7 +29,7 @@ public class PrinterTests
         string expected = string.Format(Environment.NewLine);
 
         //Act
-        Printer.WriteLine();
+        StaticPrinter.WriteLine();
 
         //Assert
         expected.Should<string>().Be(stringWriter.ToString());
@@ -44,7 +44,7 @@ public class PrinterTests
         string expected = string.Format("single line");
 
         //Act
-        Printer.Write(textToDisplay);
+        StaticPrinter.Write(textToDisplay);
 
         //Assert
         expected.Should<string>().Be(stringWriter.ToString());
@@ -58,7 +58,7 @@ public class PrinterTests
         Console.SetIn(stringReader);
 
         //Act
-        string? result = Printer.ReadLine();
+        string? result = StaticPrinter.ReadLine();
 
         //Assert
         result.Should<string>().Be(testInput);
@@ -72,7 +72,7 @@ public class PrinterTests
         Console.SetIn(stringReader);
 
         //Act
-        string? result = Printer.ReadLine();
+        string? result = StaticPrinter.ReadLine();
 
         //Assert
         result.Should<string>().BeNull();

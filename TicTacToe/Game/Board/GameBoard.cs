@@ -35,7 +35,7 @@
         }
 
         /// <returns><see langword="true"/> If there the passed <paramref name="player"/> made the winning move</returns>
-        public bool MakeMove(Player.Player player, string playerInput)
+        public bool MakeMove(Player player, string playerInput)
         {
             var cell = _board.First(c => c.ValueStr == playerInput);
             LogMove(player, cell);
@@ -56,7 +56,7 @@
                 ) return true;
             return false;
         }
-        private void LogMove(Player.Player player, Cell cell)
+        private void LogMove(Player player, Cell cell)
         {
             string moveLog = $"player:{player.Name} set their marker:{player.Marker} on cell:{cell.ValueStr}";
             MoveHistory.Push(moveLog);

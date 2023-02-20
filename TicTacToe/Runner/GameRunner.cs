@@ -1,6 +1,5 @@
 ﻿using TicTacToe.CustomException;
 using TicTacToe.Game.Board;
-using TicTacToe.Game.Player;
 using TicTacToe.Helpers;
 using TicTacToe.Runner.Enums;
 using TicTacToe.Runner.Utils;
@@ -40,7 +39,7 @@ namespace TicTacToe.Runner
 
         private void ShowMainMenu()
         {
-            Printer.Greet(_board, _playerOne, _playerTwo);
+            StaticPrinter.Greet(_board, _playerOne, _playerTwo);
 
             var playerInput = (StartGameOptions)GameRunnerHelpers.WaitPlayerValidKeyInput('1', '3');
             switch (playerInput)
@@ -59,7 +58,7 @@ namespace TicTacToe.Runner
 
         private void ChangeSettings()
         {
-            Printer.DisplaySettings(_board, _playerOne, _playerTwo);
+            StaticPrinter.DisplaySettings(_board, _playerOne, _playerTwo);
             var playerInput = (ChangeSettingOptions)GameRunnerHelpers.WaitPlayerValidKeyInput('1', '5');
             switch (playerInput)
             {
@@ -67,19 +66,19 @@ namespace TicTacToe.Runner
                     BoardSettings();
                     break;
                 case ChangeSettingOptions.ChangePlayerOneName:
-                    Printer.DisplayNameChooseMessage(_playerOne);
+                    StaticPrinter.DisplayNameChooseMessage(_playerOne);
                     _playerOne.ChangeName(WaitPlayerValidName());
                     break;
                 case ChangeSettingOptions.ChangePlayerTwoName:
-                    Printer.DisplayNameChooseMessage(_playerTwo);
+                    StaticPrinter.DisplayNameChooseMessage(_playerTwo);
                     _playerTwo.ChangeName(WaitPlayerValidName());
                     break;
                 case ChangeSettingOptions.ChangePlayerOneMarker:
-                    Printer.DisplayMarkerChooser(_playerOne);
+                    StaticPrinter.DisplayMarkerChooser(_playerOne);
                     _playerOne.ChangeMarker(WaitplayerValidMarker());
                     break;
                 case ChangeSettingOptions.ChangePlayerTwoMarker:
-                    Printer.DisplayMarkerChooser(_playerTwo);
+                    StaticPrinter.DisplayMarkerChooser(_playerTwo);
                     _playerTwo.ChangeMarker(WaitplayerValidMarker());
                     break;
             }
@@ -88,18 +87,18 @@ namespace TicTacToe.Runner
 
         private string WaitplayerValidMarker()
         {
-            var playerInput = Printer.ReadLine();
+            var playerInput = StaticPrinter.ReadLine();
             while (PlayerInputParser.IsValidMarkerInput(playerInput, _playerOne.Marker, _playerTwo.Marker) == false)
             {
-                Printer.DisplayInvalidMarkerMessage();
-                playerInput = Printer.ReadLine();
+                StaticPrinter.DisplayInvalidMarkerMessage();
+                playerInput = StaticPrinter.ReadLine();
             }
             return playerInput!.Trim().ToString();
         }
 
         private void BoardSettings()
         {
-            Printer.DisplayBoardOptions(_board);
+            StaticPrinter.DisplayBoardOptions(_board);
             var playerInput = (BoardSizeOptions)GameRunnerHelpers.WaitPlayerValidKeyInput('2', '5');
 
             var rowSizeToBoardSizeOptions = (BoardSizeOptions)Enum.Parse(typeof(BoardSizeOptions), _board.RowSize.ToString());
@@ -119,15 +118,15 @@ namespace TicTacToe.Runner
 
             while (gameNotEnd)
             {
-                Printer.DrawBoard(_board);
+                StaticPrinter.DrawBoard(_board);
                 Player currentPlayer = playerOneTurn ? _playerOne : _playerTwo;
-                Printer.DisplayCurrentPlayerTurn(currentPlayer);
+                StaticPrinter.DisplayCurrentPlayerTurn(currentPlayer);
                 string[] availableCells = GetAvailableCells();
 
                 string playerInput;
                 if (currentPlayer.Human)
                 {
-                    Printer.DisplayAvailableCells(availableCells);
+                    StaticPrinter.DisplayAvailableCells(availableCells);
                     playerInput = GameRunnerHelpers.WaitPlayerValidStringInput(availableCells);
                 }
                 else
@@ -137,12 +136,12 @@ namespace TicTacToe.Runner
 
                 if (_board.MakeMove(currentPlayer, playerInput))
                 {
-                    Printer.DisplayWinnerMessage(currentPlayer, _board);
+                    StaticPrinter.DisplayWinnerMessage(currentPlayer, _board);
                     gameNotEnd = false;
                 }
                 else if (_board.TotalMoves >= _board.BoardSize)
                 {
-                    Printer.DisplayDrawMessage(_board);
+                    StaticPrinter.DisplayDrawMessage(_board);
                     gameNotEnd = false;
                 }
                 else
@@ -155,11 +154,11 @@ namespace TicTacToe.Runner
 
         private bool PlayAgainstComputer()
         {
-            Printer.DisplayPlayAgainstComputerMessage();
+            StaticPrinter.DisplayPlayAgainstComputerMessage();
             var playAgainstComputerChoice = (YesNoOption)GameRunnerHelpers.WaitPlayerValidKeyInput('1', '2');
             if (playAgainstComputerChoice == YesNoOption.Yes)
             {
-                Printer.DisplayFirstOrSecondMessage();
+                StaticPrinter.DisplayFirstOrSecondMessage();
                 var playFirstChoice = (YesNoOption)GameRunnerHelpers.WaitPlayerValidKeyInput('1', '2');
                 if (playFirstChoice == YesNoOption.Yes)
                 {
@@ -175,7 +174,7 @@ namespace TicTacToe.Runner
 
         private void ShowRestartOption()
         {
-            Printer.DisplayRestartGameMessage();
+            StaticPrinter.DisplayRestartGameMessage();
             var playerInput = (YesNoOption)GameRunnerHelpers.WaitPlayerValidKeyInput('1', '2');
             if (playerInput == YesNoOption.Yes)
             {
@@ -195,11 +194,11 @@ namespace TicTacToe.Runner
 
         private string WaitPlayerValidName()
         {
-            var playerInput = Printer.ReadLine();
+            var playerInput = StaticPrinter.ReadLine();
             while (PlayerInputParser.IsValidNameInput(playerInput, _playerOne.Name, _playerTwo.Name) == false)
             {
-                Printer.DisplayInvalidNameMessage();
-                playerInput = Printer.ReadLine();
+                StaticPrinter.DisplayInvalidNameMessage();
+                playerInput = StaticPrinter.ReadLine();
             }
             return playerInput!.ToString();
         }
