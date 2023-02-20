@@ -41,7 +41,7 @@ namespace TicTacToe.Runner
         {
             StaticPrinter.Greet(_board, _playerOne, _playerTwo);
 
-            var playerInput = (StartGameOptions)GameRunnerHelpers.WaitPlayerValidKeyInput('1', '3');
+            var playerInput = (StartGameOptions)GameRunnerHelpers.WaitPlayerValidKeyInput((char)StartGameOptions.StartGame, (char)StartGameOptions.Exit);
             switch (playerInput)
             {
                 case StartGameOptions.StartGame:
@@ -59,7 +59,7 @@ namespace TicTacToe.Runner
         private void ChangeSettings()
         {
             StaticPrinter.DisplaySettings(_board, _playerOne, _playerTwo);
-            var playerInput = (ChangeSettingOptions)GameRunnerHelpers.WaitPlayerValidKeyInput('1', '5');
+            var playerInput = (ChangeSettingOptions)GameRunnerHelpers.WaitPlayerValidKeyInput((char)ChangeSettingOptions.ChangeBoardSize, (char)ChangeSettingOptions.ChangePlayerTwoMarker);
             switch (playerInput)
             {
                 case ChangeSettingOptions.ChangeBoardSize:
@@ -99,7 +99,7 @@ namespace TicTacToe.Runner
         private void BoardSettings()
         {
             StaticPrinter.DisplayBoardOptions(_board);
-            var playerInput = (BoardSizeOptions)GameRunnerHelpers.WaitPlayerValidKeyInput('2', '5');
+            var playerInput = (BoardSizeOptions)GameRunnerHelpers.WaitPlayerValidKeyInput((char)BoardSizeOptions.Two, (char)BoardSizeOptions.Five);
 
             var rowSizeToBoardSizeOptions = (BoardSizeOptions)Enum.Parse(typeof(BoardSizeOptions), _board.RowSize.ToString());
 
@@ -113,53 +113,61 @@ namespace TicTacToe.Runner
         private void StartGame()
         {
             bool gameNotEnd = true;
-            bool playerOneTurn = true;
+            bool playerOneTurn = false;
             PlayAgainstComputer();
 
             while (gameNotEnd)
             {
+                playerOneTurn = !playerOneTurn;
                 StaticPrinter.DrawBoard(_board);
                 Player currentPlayer = playerOneTurn ? _playerOne : _playerTwo;
                 StaticPrinter.DisplayCurrentPlayerTurn(currentPlayer);
                 string[] availableCells = GetAvailableCells();
 
-                string playerInput;
-                if (currentPlayer.Human)
-                {
-                    StaticPrinter.DisplayAvailableCells(availableCells);
-                    playerInput = GameRunnerHelpers.WaitPlayerValidStringInput(availableCells);
-                }
-                else
-                {
-                    playerInput = GameRunnerHelpers.GetComputersMove(availableCells);
-                }
+                string currentPlayerInput = GetCurrentPlayerInput(currentPlayer, availableCells);
 
-                if (_board.MakeMove(currentPlayer, playerInput))
+                if (MakeMoveCheckWin(currentPlayer, currentPlayerInput))
                 {
                     StaticPrinter.DisplayWinnerMessage(currentPlayer, _board);
                     gameNotEnd = false;
                 }
-                else if (_board.TotalMoves >= _board.BoardSize)
+                else if (CheckDraw()) 
                 {
                     StaticPrinter.DisplayDrawMessage(_board);
                     gameNotEnd = false;
-                }
-                else
-                {
-                    playerOneTurn = !playerOneTurn;
                 }
             }
             ShowRestartOption();
         }
 
-        private bool PlayAgainstComputer()
+        private bool CheckDraw() => _board.TotalMoves >= _board.BoardSize;
+
+        private bool MakeMoveCheckWin(Player currentPlayer, string currentPlayerInput)
+        {
+            return _board.MakeMove(currentPlayer, currentPlayerInput);
+        }
+
+        private static string GetCurrentPlayerInput(Player currentPlayer, string[] availableCells)
+        {
+            if (currentPlayer.Human)
+            {
+                StaticPrinter.DisplayAvailableCells(availableCells);
+                return GameRunnerHelpers.WaitPlayerValidStringInput(availableCells);
+            }
+            else
+            {
+                return GameRunnerHelpers.GetComputersMove(availableCells);
+            }
+        }
+
+        private void PlayAgainstComputer()
         {
             StaticPrinter.DisplayPlayAgainstComputerMessage();
-            var playAgainstComputerChoice = (YesNoOption)GameRunnerHelpers.WaitPlayerValidKeyInput('1', '2');
+            var playAgainstComputerChoice = (YesNoOption)GameRunnerHelpers.WaitPlayerValidKeyInput((char)YesNoOption.Yes, (char)YesNoOption.No);
             if (playAgainstComputerChoice == YesNoOption.Yes)
             {
                 StaticPrinter.DisplayFirstOrSecondMessage();
-                var playFirstChoice = (YesNoOption)GameRunnerHelpers.WaitPlayerValidKeyInput('1', '2');
+                var playFirstChoice = (YesNoOption)GameRunnerHelpers.WaitPlayerValidKeyInput((char)YesNoOption.Yes, (char)YesNoOption.No);
                 if (playFirstChoice == YesNoOption.Yes)
                 {
                     _playerTwo.SetPlayerAsComputer();
@@ -169,13 +177,13 @@ namespace TicTacToe.Runner
                     _playerOne.SetPlayerAsComputer();
                 }
             }
-            return false;
         }
 
         private void ShowRestartOption()
         {
             StaticPrinter.DisplayRestartGameMessage();
-            var playerInput = (YesNoOption)GameRunnerHelpers.WaitPlayerValidKeyInput('1', '2');
+            
+            var playerInput = (YesNoOption)GameRunnerHelpers.WaitPlayerValidKeyInput((char)YesNoOption.Yes, (char)YesNoOption.No);
             if (playerInput == YesNoOption.Yes)
             {
                 _board = new GameBoard(_board.RowSize);
