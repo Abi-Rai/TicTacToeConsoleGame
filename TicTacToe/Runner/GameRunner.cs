@@ -178,7 +178,7 @@ namespace TicTacToe.Runner
             var playerInput = (YesNoOption)GameRunnerHelpers.WaitPlayerValidKeyInput('1', '2');
             if (playerInput == YesNoOption.Yes)
             {
-                _board = new GameBoard();
+                _board = new GameBoard(_board.RowSize);
                 ShowMainMenu();
             }
 
