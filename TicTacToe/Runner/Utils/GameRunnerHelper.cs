@@ -3,7 +3,7 @@ using TicTacToe.Helpers;
 using TicTacToe.Helpers.Interfaces;
 
 namespace TicTacToe.Runner.Utils;
-public class GameRunnerHelpers:GameRunnerBase
+public class GameRunnerHelper:GameRunnerBase
 {
     public static void Exit()
     {
@@ -32,7 +32,7 @@ public class GameRunnerHelpers:GameRunnerBase
         char[] validKeys = GetValidKeys(from, to);
         Printer.DisplayValidKeys(validKeys);
         ConsoleKeyInfo keyPressed = Printer.ReadKey();
-        while (StaticInputParser.IsValidKey(keyPressed, validKeys) == false)
+        while (InputParser.IsValidKey(keyPressed, validKeys) == false)
         {
             Printer.DisplayInvalidKeyMessage(validKeys);
             keyPressed = Printer.ReadKey();
@@ -42,7 +42,7 @@ public class GameRunnerHelpers:GameRunnerBase
     public static string WaitPlayerValidStringInput(string[] availableCells)
     {
         var playerInput = Printer.ReadLine();
-        while (StaticInputParser.IsValidInput(playerInput, availableCells) == false)
+        while (InputParser.IsValidInput(playerInput, availableCells) == false)
         {
             Printer.DisplayInvalidStringMessage(availableCells);
             playerInput = Printer.ReadLine();

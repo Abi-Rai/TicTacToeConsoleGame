@@ -13,7 +13,6 @@ namespace TicTacToe
         }
         private static GameRunner SetupGameRunner()
         {
-            GameRunnerBase.Printer = new Printer();
             GameRunner game = new();
             return game;
         }

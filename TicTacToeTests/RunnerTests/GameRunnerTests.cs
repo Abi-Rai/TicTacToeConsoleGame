@@ -26,7 +26,7 @@ namespace TicTacToeTests.RunnerTests
         public void GetValidKeys_Should_ReturnValidKeys(char from, char to, char[] expectedArray)
         {
             //Act 
-            var result = GameRunnerHelpers.GetValidKeys(from, to);
+            var result = GameRunnerHelper.GetValidKeys(from, to);
             //Assert
             result.Should().BeEquivalentTo(expectedArray);
         }
@@ -40,7 +40,7 @@ namespace TicTacToeTests.RunnerTests
             //Arrange
             var playerInput = new ConsoleKeyInfo(keyChar, consoleKey, false, false, false);
 
-            char[] validKeys = GameRunnerHelpers.GetValidKeys(from, to);
+            char[] validKeys = GameRunnerHelper.GetValidKeys(from, to);
 
             _mockPrinter.Setup(p => p.ReadKey()).Returns(playerInput);
             _mockPrinter.Setup(p => p.DisplayValidKeys(validKeys)).Verifiable();
@@ -48,12 +48,12 @@ namespace TicTacToeTests.RunnerTests
             GameRunnerBase.Printer = _mockPrinter.Object;
             _mockInputParser.Setup(ip => ip.IsValidKey(playerInput, validKeys))
                             .Returns(true);
-            StaticInputParser._inputParser = _mockInputParser.Object;
+            GameRunnerBase.InputParser = _mockInputParser.Object;
 
             char expected = keyChar;
 
             //Act 
-            var result = GameRunnerHelpers.WaitPlayerValidKeyInput(from, to);
+            var result = GameRunnerHelper.WaitPlayerValidKeyInput(from, to);
             //Assert
             _mockPrinter.Verify(p => p.DisplayValidKeys(validKeys), Times.Once);
             _mockPrinter.Verify(p => p.ReadKey(), Times.Once);
@@ -72,7 +72,7 @@ namespace TicTacToeTests.RunnerTests
                 new ConsoleKeyInfo('4', ConsoleKey.D4, false, false, false)
             };
 
-            char[] validKeys = GameRunnerHelpers.GetValidKeys('4', '6');
+            char[] validKeys = GameRunnerHelper.GetValidKeys('4', '6');
 
             var _mockPrinter = new Mock<IPrinter>();
             _mockPrinter.SetupSequence(p => p.ReadKey())
@@ -90,10 +90,10 @@ namespace TicTacToeTests.RunnerTests
                             {
                                 return key.KeyChar == expected;
                             });
-            StaticInputParser._inputParser = _mockInputParser.Object;
+            GameRunnerBase.InputParser = _mockInputParser.Object;
 
             // Act 
-            var result = GameRunnerHelpers.WaitPlayerValidKeyInput('4', '6');
+            var result = GameRunnerHelper.WaitPlayerValidKeyInput('4', '6');
 
             // Assert
             _mockPrinter.Verify(p => p.DisplayValidKeys(validKeys), Times.Once);
@@ -119,9 +119,9 @@ namespace TicTacToeTests.RunnerTests
                                 return cells.Contains(s);
                             });
 
-            StaticInputParser._inputParser = _mockInputParser.Object;
+            GameRunnerBase.InputParser = _mockInputParser.Object;
             //Act 
-            var result = GameRunnerHelpers.WaitPlayerValidStringInput(availableCells);
+            var result = GameRunnerHelper.WaitPlayerValidStringInput(availableCells);
 
             //Assert
             _mockPrinter.Verify(p => p.ReadLine(), Times.Once);
@@ -149,9 +149,9 @@ namespace TicTacToeTests.RunnerTests
                                 return cells.Contains(s);
                             });
 
-            StaticInputParser._inputParser = _mockInputParser.Object;
+            GameRunnerBase.InputParser = _mockInputParser.Object;
             //Act 
-            var result = GameRunnerHelpers.WaitPlayerValidStringInput(availableCells);
+            var result = GameRunnerHelper.WaitPlayerValidStringInput(availableCells);
 
             //Assert
             _mockPrinter.Verify(p => p.DisplayInvalidStringMessage(availableCells), Times.Exactly(4));
@@ -168,7 +168,7 @@ namespace TicTacToeTests.RunnerTests
         public void GetComputersMove_Should_ReturnAValidString(params string[] availableCells)
         {
             //Act 
-            var result = GameRunnerHelpers.GetComputersMove(availableCells);
+            var result = GameRunnerHelper.GetComputersMove(availableCells);
             //Assert
             availableCells.Should().Contain(result);
         }
