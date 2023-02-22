@@ -5,6 +5,12 @@ namespace TicTacToeTests.HelperTests;
 
 public class PrinterTests
 {
+    private readonly Printer _printer;
+    public PrinterTests()
+    {
+        _printer = new Printer();
+    }
+
     [Fact]
     public void WriteLineWithText_ShouldWriteToConsoleWithNewLine()
     {
@@ -15,7 +21,7 @@ public class PrinterTests
         string expected = string.Format("Hello John{0}", Environment.NewLine);
 
         //Act
-        StaticPrinter.WriteLine(textToDisplay);
+        _printer.WriteLine(textToDisplay);
 
         //Assert
         expected.Should<string>().Be(stringWriter.ToString());
@@ -29,7 +35,7 @@ public class PrinterTests
         string expected = string.Format(Environment.NewLine);
 
         //Act
-        StaticPrinter.WriteLine();
+        _printer.WriteLine();
 
         //Assert
         expected.Should<string>().Be(stringWriter.ToString());
@@ -44,7 +50,7 @@ public class PrinterTests
         string expected = string.Format("single line");
 
         //Act
-        StaticPrinter.Write(textToDisplay);
+        _printer.Write(textToDisplay);
 
         //Assert
         expected.Should<string>().Be(stringWriter.ToString());
@@ -58,7 +64,7 @@ public class PrinterTests
         Console.SetIn(stringReader);
 
         //Act
-        string? result = StaticPrinter.ReadLine();
+        string? result = _printer.ReadLine();
 
         //Assert
         result.Should<string>().Be(testInput);
@@ -72,7 +78,7 @@ public class PrinterTests
         Console.SetIn(stringReader);
 
         //Act
-        string? result = StaticPrinter.ReadLine();
+        string? result = _printer.ReadLine();
 
         //Assert
         result.Should<string>().BeNull();

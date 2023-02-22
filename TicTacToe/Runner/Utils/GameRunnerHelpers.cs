@@ -1,23 +1,23 @@
 ﻿using System.Runtime.CompilerServices;
 using TicTacToe.Helpers;
+using TicTacToe.Helpers.Interfaces;
 
-[assembly: InternalsVisibleTo("TicTacToeTests")]
 namespace TicTacToe.Runner.Utils;
-internal class GameRunnerHelpers
+public class GameRunnerHelpers:GameRunnerBase
 {
-    internal static void Exit()
+    public static void Exit()
     {
-        StaticPrinter.DisplayExitMessage();
+        Printer.DisplayExitMessage();
     }
 
-    internal static string GetComputersMove(string[] availableCells)
+    public static string GetComputersMove(string[] availableCells)
     {
         Random rand = new();
         int index = rand.Next(0, availableCells.Length);
         return availableCells[index];
     }
 
-    internal static char[] GetValidKeys(char from, char to)
+    public static char[] GetValidKeys(char from, char to)
     {
         List<char> validKeys = new();
         while (from <= to)
@@ -27,25 +27,25 @@ internal class GameRunnerHelpers
         return validKeys.ToArray();
     }
 
-    internal static char WaitPlayerValidKeyInput(char from, char to)
+    public static char WaitPlayerValidKeyInput(char from, char to)
     {
         char[] validKeys = GetValidKeys(from, to);
-        StaticPrinter.DisplayValidKeys(validKeys);
-        ConsoleKeyInfo keyPressed = StaticPrinter.ReadKey();
+        Printer.DisplayValidKeys(validKeys);
+        ConsoleKeyInfo keyPressed = Printer.ReadKey();
         while (StaticInputParser.IsValidKey(keyPressed, validKeys) == false)
         {
-            StaticPrinter.DisplayInvalidKeyMessage(validKeys);
-            keyPressed = StaticPrinter.ReadKey();
+            Printer.DisplayInvalidKeyMessage(validKeys);
+            keyPressed = Printer.ReadKey();
         }
         return keyPressed.KeyChar;
     }
-    internal static string WaitPlayerValidStringInput(string[] availableCells)
+    public static string WaitPlayerValidStringInput(string[] availableCells)
     {
-        var playerInput = StaticPrinter.ReadLine();
+        var playerInput = Printer.ReadLine();
         while (StaticInputParser.IsValidInput(playerInput, availableCells) == false)
         {
-            StaticPrinter.DisplayInvalidStringMessage(availableCells);
-            playerInput = StaticPrinter.ReadLine();
+            Printer.DisplayInvalidStringMessage(availableCells);
+            playerInput = Printer.ReadLine();
         }
         return playerInput!;
     }
