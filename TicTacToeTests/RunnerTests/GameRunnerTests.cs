@@ -1,6 +1,5 @@
 ﻿using FluentAssertions;
 using Moq;
-using TicTacToe.Helpers;
 using TicTacToe.Helpers.Interfaces;
 using TicTacToe.Runner;
 using TicTacToe.Runner.Utils;
@@ -14,7 +13,7 @@ namespace TicTacToeTests.RunnerTests
 
         public GameRunnerTests()
         {
-            
+
             _mockPrinter = new Mock<IPrinter>();
             _mockInputParser = new Mock<IInputParser>();
         }
@@ -44,7 +43,7 @@ namespace TicTacToeTests.RunnerTests
 
             _mockPrinter.Setup(p => p.ReadKey()).Returns(playerInput);
             _mockPrinter.Setup(p => p.DisplayValidKeys(validKeys)).Verifiable();
-            //StaticPrinter._printer = _mockPrinter.Object;
+
             GameRunnerBase.Printer = _mockPrinter.Object;
             _mockInputParser.Setup(ip => ip.IsValidKey(playerInput, validKeys))
                             .Returns(true);
@@ -82,7 +81,7 @@ namespace TicTacToeTests.RunnerTests
             .Returns(inputKeys[3]);
             _mockPrinter.Setup(p => p.DisplayValidKeys(validKeys)).Verifiable();
             _mockPrinter.Setup(p => p.DisplayInvalidKeyMessage(validKeys)).Verifiable();
-            //StaticPrinter._printer = _mockPrinter.Object;
+
             GameRunnerBase.Printer = _mockPrinter.Object;
             char expected = '4';
             _mockInputParser.Setup(ip => ip.IsValidKey(It.IsAny<ConsoleKeyInfo>(), validKeys))
@@ -111,7 +110,7 @@ namespace TicTacToeTests.RunnerTests
         {
             //Arrange
             _mockPrinter.Setup(p => p.ReadLine()).Returns(playerInput);
-            //StaticPrinter._printer = _mockPrinter.Object;
+
             GameRunnerBase.Printer = _mockPrinter.Object;
             _mockInputParser.Setup(ip => ip.IsValidInput(It.IsAny<string>(), availableCells))
                             .Returns((string s, string[] cells) =>
@@ -140,7 +139,6 @@ namespace TicTacToeTests.RunnerTests
                         .Returns(string.Empty)
                         .Returns("4");
 
-            //StaticPrinter._printer = _mockPrinter.Object;
             GameRunnerBase.Printer = _mockPrinter.Object;
             string[] availableCells = new string[] { "2", "3", "4", "5" };
             _mockInputParser.Setup(ip => ip.IsValidInput(It.IsAny<string>(), availableCells))
@@ -155,7 +153,7 @@ namespace TicTacToeTests.RunnerTests
 
             //Assert
             _mockPrinter.Verify(p => p.DisplayInvalidStringMessage(availableCells), Times.Exactly(4));
-            _mockInputParser.Verify(p => p.IsValidInput(It.IsAny<string>(), availableCells),Times.Exactly(5));
+            _mockInputParser.Verify(p => p.IsValidInput(It.IsAny<string>(), availableCells), Times.Exactly(5));
             _mockPrinter.Verify(p => p.ReadLine(), Times.Exactly(5));
             availableCells.Should().Contain(result);
             result.Should().Be("4");

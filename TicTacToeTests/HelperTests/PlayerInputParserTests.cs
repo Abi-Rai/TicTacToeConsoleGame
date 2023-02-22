@@ -147,7 +147,7 @@ public class PlayerInputParserTests
         string playerOneMarker = "X";
         string playerTwoMarker = "O";
         //Act 
-        var result = _inputParser.IsValidMarkerInput(validPlayerInput,playerOneMarker,playerTwoMarker);
+        var result = _inputParser.IsValidMarkerInput(validPlayerInput, playerOneMarker, playerTwoMarker);
 
         //Assert
         result.Should().BeTrue();

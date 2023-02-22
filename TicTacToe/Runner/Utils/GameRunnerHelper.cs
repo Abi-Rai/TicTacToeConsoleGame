@@ -1,9 +1,5 @@
-﻿using System.Runtime.CompilerServices;
-using TicTacToe.Helpers;
-using TicTacToe.Helpers.Interfaces;
-
-namespace TicTacToe.Runner.Utils;
-public class GameRunnerHelper:GameRunnerBase
+﻿namespace TicTacToe.Runner.Utils;
+public class GameRunnerHelper : GameRunnerBase
 {
     public static void Exit()
     {

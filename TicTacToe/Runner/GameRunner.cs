@@ -1,7 +1,5 @@
 ﻿using TicTacToe.CustomException;
 using TicTacToe.Game.Board;
-using TicTacToe.Helpers;
-using TicTacToe.Helpers.Interfaces;
 using TicTacToe.Runner.Enums;
 using TicTacToe.Runner.Utils;
 
@@ -148,7 +146,7 @@ namespace TicTacToe.Runner
             return _board.MakeMove(currentPlayer, currentPlayerInput);
         }
 
-        private string GetCurrentPlayerInput(Player currentPlayer, string[] availableCells)
+        private static string GetCurrentPlayerInput(Player currentPlayer, string[] availableCells)
         {
             if (currentPlayer.Human)
             {

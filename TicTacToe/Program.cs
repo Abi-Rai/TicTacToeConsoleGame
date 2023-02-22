@@ -1,6 +1,4 @@
-﻿using TicTacToe.Helpers;
-using TicTacToe.Runner;
-using TicTacToe.Runner.Utils;
+﻿using TicTacToe.Runner;
 
 namespace TicTacToe
 {
