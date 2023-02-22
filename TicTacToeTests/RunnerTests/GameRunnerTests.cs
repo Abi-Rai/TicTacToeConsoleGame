@@ -125,6 +125,39 @@ namespace TicTacToeTests.RunnerTests
             availableCells.Should().Contain(result);
         }
 
+        [Fact]
+        public void WaitPlayerValidStringInput_ShouldLoopUntil_ValidInput()
+        {
+            //Arrange
+
+            _mockPrinter.SetupSequence(p => p.ReadLine())
+                        .Returns("A")
+                        .Returns("&^$")
+                        .Returns("Two")
+                        .Returns(string.Empty)
+                        .Returns("4");
+
+            StaticPrinter._printer = _mockPrinter.Object;
+
+            string[] availableCells = new string[] { "2", "3", "4", "5" };
+            _mockInputParser.Setup(ip => ip.IsValidInput(It.IsAny<string>(), availableCells))
+                            .Returns((string s, string[] cells) =>
+                            {
+                                return cells.Contains(s);
+                            });
+
+            StaticInputParser._inputParser = _mockInputParser.Object;
+            //Act 
+            var result = GameRunnerHelpers.WaitPlayerValidStringInput(availableCells);
+
+            //Assert
+            _mockPrinter.Verify(p => p.DisplayInvalidStringMessage(availableCells), Times.Exactly(4));
+            _mockInputParser.Verify(p => p.IsValidInput(It.IsAny<string>(), availableCells),Times.Exactly(5));
+            _mockPrinter.Verify(p => p.ReadLine(), Times.Exactly(5));
+            availableCells.Should().Contain(result);
+            result.Should().Be("4");
+        }
+
         [Theory]
         [InlineData("1", "2", "3")]
         [InlineData("1", "2", "3", "4", "5", "6")]
