@@ -23,6 +23,7 @@ namespace TicTacToe.Runner
             try
             {
                 ShowMainMenu();
+                ShowRestartOption();
             }
             catch (UserRequestExitException ex)
             {
@@ -136,7 +137,6 @@ namespace TicTacToe.Runner
                     gameNotEnd = false;
                 }
             }
-            ShowRestartOption();
         }
 
         private bool CheckDraw() => _board.TotalMoves >= _board.BoardSize;
