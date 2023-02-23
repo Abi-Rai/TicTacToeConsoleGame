@@ -21,8 +21,7 @@
 
         public bool Equals(Cell other)
         {
-            if (ValueStr == other.ValueStr) return true;
-            return false;
+            return ValueStr == other.ValueStr;
         }
     }
 }
