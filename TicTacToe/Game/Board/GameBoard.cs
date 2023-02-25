@@ -1,4 +1,6 @@
-﻿namespace TicTacToe.Game.Board
+﻿using TicTacToe.Game.Board.Enums;
+
+namespace TicTacToe.Game.Board
 {
     public class GameBoard
     {
@@ -151,12 +153,6 @@
             return false;
         }
 
-        public enum RowSizes
-        {
-            Two = 4,
-            Three = 9,
-            Four = 16,
-            Five = 25
-        }
+
     }
 }

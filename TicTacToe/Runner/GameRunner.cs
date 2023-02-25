@@ -105,7 +105,7 @@ namespace TicTacToe.Runner
 
             if (rowSizeToBoardSizeOptions != playerInput)
             {
-                var boardSizeToRowSize = (GameBoard.RowSizes)Enum.Parse(typeof(GameBoard.RowSizes), playerInput.ToString());
+                var boardSizeToRowSize = (RowSizes)Enum.Parse(typeof(RowSizes), playerInput.ToString());
                 _board = new GameBoard(boardSizeToRowSize);
             }
         }
