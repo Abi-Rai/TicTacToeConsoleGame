@@ -1,5 +1,6 @@
 ﻿using TicTacToe.CustomException;
 using TicTacToe.Game.Board;
+using TicTacToe.Game.Board.Enums;
 using TicTacToe.Runner.Enums;
 using TicTacToe.Runner.Utils;
 
