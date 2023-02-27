@@ -14,11 +14,11 @@ User interaction is all done in the console via key press inputs and text inputs
 
 On the first prompt user can either elect to start game with the default settings or change the settings.
 
-You can take turns playing both players moves if you feel adventerous or select to play against a ~~an AI~~ Computer. **N.B.** Not much of an AI, it simply selects a `Random` cell from the remaining available cells. 
+You can take turns playing both players moves if you feel adventerous or select to play against a ~~an AI~~ Computer. Not much of an AI atm, it simply selects a `Random` cell from the remaining available cells. 
 
 ### Benchmarking to choose Data Structure.
 
-For Tic-Tac-Toe, which only requires 9 cells to store the game boards' state, a simple array `char[] Board = new char[9]` should suffice. However, I wanted to test how the other data structures would perform.
+For Tic-Tac-Toe, which only requires 9 cells to store the game boards' state, a simple array `char[] Board = new char[9]` should suffice. However, I wanted to test how the other data structures/collections would perform.
 
 * Single-dimensional array `char[]`
 * Multi-Dimensional array `char[,]` 
