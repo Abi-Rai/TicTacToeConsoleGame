@@ -1,7 +1,7 @@
 ﻿using TicTacToe.Helpers;
 using TicTacToe.Helpers.Interfaces;
 
-namespace TicTacToe.Runner
+namespace TicTacToe.Game.Runner
 {
     public class GameRunnerBase
     {

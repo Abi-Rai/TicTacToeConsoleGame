@@ -1,4 +1,4 @@
-﻿namespace TicTacToe.Runner.Utils;
+﻿namespace TicTacToe.Game.Runner.Utils;
 public class GameRunnerHelper : GameRunnerBase
 {
     public static void Exit()

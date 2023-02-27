@@ -1,10 +1,10 @@
 ﻿using TicTacToe.CustomException;
 using TicTacToe.Game.Board;
 using TicTacToe.Game.Board.Enums;
-using TicTacToe.Runner.Enums;
-using TicTacToe.Runner.Utils;
+using TicTacToe.Game.Runner.Enums;
+using TicTacToe.Game.Runner.Utils;
 
-namespace TicTacToe.Runner
+namespace TicTacToe.Game.Runner
 {
 
     public class GameRunner : GameRunnerBase

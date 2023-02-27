@@ -1,4 +1,4 @@
-﻿namespace TicTacToe.Runner.Enums
+﻿namespace TicTacToe.Game.Runner.Enums
 {
     internal enum StartGameOptions
     {

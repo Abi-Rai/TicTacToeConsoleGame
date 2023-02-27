@@ -1,8 +1,8 @@
 ﻿using FluentAssertions;
 using Moq;
+using TicTacToe.Game.Runner;
+using TicTacToe.Game.Runner.Utils;
 using TicTacToe.Helpers.Interfaces;
-using TicTacToe.Runner;
-using TicTacToe.Runner.Utils;
 
 namespace TicTacToeTests.RunnerTests
 {

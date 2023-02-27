@@ -1,4 +1,4 @@
-﻿using TicTacToe.Runner;
+﻿using TicTacToe.Game.Runner;
 
 namespace TicTacToe
 {
