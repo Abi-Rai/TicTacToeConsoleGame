@@ -4,23 +4,23 @@ namespace TicTacToe.Game.Board
 {
     public class GameBoard
     {
-        private Cell[] _board;
+        public Cell[] Board { get; private set; }
         public int BoardSize { get; private set; }
         public RowSizes RowSize { get; private set; }
         public int RowLength { get; private set; }
-        public Cell[] Board { get => _board; set => _board = value; }
         public Stack<string> MoveHistory { get; private set; }
 
-        public int TotalMoves;
+        private int _totalMoves;
+        public int TotalMoves { get => _totalMoves; }
 
         public GameBoard(RowSizes numberOfCells = RowSizes.Three)
         {
             RowSize = numberOfCells;
             BoardSize = (int)numberOfCells;
             RowLength = (int)Math.Sqrt(BoardSize);
-            TotalMoves = 0;
+            _totalMoves = 0;
             MoveHistory = new Stack<string>();
-            _board = NewGame();
+            Board = NewGame();
         }
 
 
@@ -39,12 +39,12 @@ namespace TicTacToe.Game.Board
         /// <returns><see langword="true"/> If there the passed <paramref name="player"/> made the winning move</returns>
         public bool MakeMove(Player player, string playerInput)
         {
-            var cell = _board.First(c => c.ValueStr == playerInput);
+            var cell = Board.First(c => c.ValueStr == playerInput);
             LogMove(player, cell);
             cell.SetValue(player.Marker);
-            _board[cell.Index] = cell;
+            Board[cell.Index] = cell;
 
-            if (TotalMoves > RowLength)
+            if (_totalMoves > RowLength)
             {
                 return CheckWin();
             }
@@ -62,16 +62,16 @@ namespace TicTacToe.Game.Board
         {
             string moveLog = $"player:{player.Name} set their marker:{player.Marker} on cell:{cell.ValueStr}";
             MoveHistory.Push(moveLog);
-            TotalMoves++;
+            _totalMoves++;
         }
         private bool CheckDiagonals()
         {
             bool match1 = true;
-            string marker1 = _board[0].ValueStr;
+            string marker1 = Board[0].ValueStr;
 
             for (int i = 1; i < RowLength; i++)
             {
-                if (_board[i * RowLength + i].ValueStr != marker1)
+                if (Board[i * RowLength + i].ValueStr != marker1)
                 {
                     match1 = false;
                     break;
@@ -84,11 +84,11 @@ namespace TicTacToe.Game.Board
             }
 
             bool match2 = true;
-            string marker2 = _board[RowLength - 1].ValueStr;
+            string marker2 = Board[RowLength - 1].ValueStr;
 
             for (int i = 1; i < RowLength; i++)
             {
-                if (_board[(i + 1) * (RowLength - 1)].ValueStr != marker2)
+                if (Board[(i + 1) * (RowLength - 1)].ValueStr != marker2)
                 {
                     match2 = false;
                     break;
@@ -108,11 +108,11 @@ namespace TicTacToe.Game.Board
             for (int i = 0; i < RowLength; i++)
             {
                 bool match = true;
-                string marker = _board[i].ValueStr;
+                string marker = Board[i].ValueStr;
 
                 for (int j = 1; j < RowLength; j++)
                 {
-                    if (_board[j * RowLength + i].ValueStr != marker)
+                    if (Board[j * RowLength + i].ValueStr != marker)
                     {
                         match = false;
                         break;
@@ -133,11 +133,11 @@ namespace TicTacToe.Game.Board
             for (int i = 0; i < RowLength; i++)
             {
                 bool match = true;
-                string marker = _board[i * RowLength].ValueStr;
+                string marker = Board[i * RowLength].ValueStr;
 
                 for (int j = 1; j < RowLength; j++)
                 {
-                    if (_board[i * RowLength + j].ValueStr != marker)
+                    if (Board[i * RowLength + j].ValueStr != marker)
                     {
                         match = false;
                         break;

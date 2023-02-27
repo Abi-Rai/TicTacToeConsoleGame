@@ -28,7 +28,7 @@ public class GameRunnerHelper : GameRunnerBase
         char[] validKeys = GetValidKeys(from, to);
         Printer.DisplayValidKeys(validKeys);
         ConsoleKeyInfo keyPressed = Printer.ReadKey();
-        while (InputParser.IsValidKey(keyPressed, validKeys) == false)
+        while (!InputParser.IsValidKey(keyPressed, validKeys))
         {
             Printer.DisplayInvalidKeyMessage(validKeys);
             keyPressed = Printer.ReadKey();
@@ -38,7 +38,7 @@ public class GameRunnerHelper : GameRunnerBase
     public static string WaitPlayerValidStringInput(string[] availableCells)
     {
         var playerInput = Printer.ReadLine();
-        while (InputParser.IsValidInput(playerInput, availableCells) == false)
+        while (!InputParser.IsValidInput(playerInput, availableCells))
         {
             Printer.DisplayInvalidStringMessage(availableCells);
             playerInput = Printer.ReadLine();

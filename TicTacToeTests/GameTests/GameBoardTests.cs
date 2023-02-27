@@ -147,6 +147,7 @@ namespace TicTacToeTests.GameTests
                 expectedMoveHistory,
                 options => options.WithStrictOrdering());
             _gameBoard.TotalMoves.Should().Be(1);
+            result.Should().BeFalse();
         }
         [Fact]
         public void MakeMove_ShouldReturnTrue_WhenDiagonalGameWon()

@@ -28,7 +28,12 @@
         public void SetPlayerBackToHuman()
         {
             Human = true;
-            Name = $"Reborn_{_playerNumberIncrementer++}";
+            Name = $"Reborn_{_playerNumberIncrementer}";
+            IncrementPlayerNumber();
+        }
+        private static void IncrementPlayerNumber()
+        {
+            _playerNumberIncrementer++;
         }
     }
 }

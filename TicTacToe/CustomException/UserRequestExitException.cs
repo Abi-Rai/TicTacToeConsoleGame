@@ -14,5 +14,10 @@
         public UserRequestExitException(string? message, Exception? innerException) : base(message, innerException)
         {
         }
+
+        protected UserRequestExitException(System.Runtime.Serialization.SerializationInfo serializationInfo, System.Runtime.Serialization.StreamingContext streamingContext) :base(serializationInfo, streamingContext) 
+        {
+            
+        }
     }
 }

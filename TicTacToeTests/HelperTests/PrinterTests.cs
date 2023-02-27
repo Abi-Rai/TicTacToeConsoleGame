@@ -47,7 +47,7 @@ public class PrinterTests
         using StringWriter stringWriter = new();
         Console.SetOut(stringWriter);
         string textToDisplay = "single line";
-        string expected = string.Format("single line");
+        string expected = "single line";
 
         //Act
         _printer.Write(textToDisplay);

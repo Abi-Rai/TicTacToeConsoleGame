@@ -4,8 +4,8 @@
     {
 
         public string ValueStr { get; private set; }
-        public bool IsPlayerSet;
-        public int Index;
+        public bool IsPlayerSet { get; set; }
+        public int Index { get; set; }
 
         public Cell(string valueStr, int index, bool isPlayerSet)
         {
@@ -22,6 +22,26 @@
         public bool Equals(Cell other)
         {
             return ValueStr == other.ValueStr;
+        }
+
+        public override bool Equals(object? obj)
+        {
+            return obj is Cell cell && Equals(cell);
+        }
+
+        public override int GetHashCode()
+        {
+            return (ValueStr.GetHashCode() * Index.GetHashCode());
+        }
+
+        public static bool operator ==(Cell left, Cell right)
+        {
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(Cell left, Cell right)
+        {
+            return !(left == right);
         }
     }
 }
