@@ -5,7 +5,7 @@ A simple console game of Tic-Tac-Toe made using .Net 7 Console app C# version 11
 
 There are three projects.
 * TicTacToe - Main console app which runs the game
-* TicTacToeBenchmarks - Some benchmarks I ran to test out some initial theories, more on that [here](#benchmarking-to-choose-data-structure). 
+* TicTacToeBenchmarks - Some benchmarks I ran to test out some initial theories, more on that [here](TicTacToeBenchmarks/README.md). 
 * TicTacToeTests - XUnit test project
 ### Instructions
 The game can be started by running the TicTacToe project. 
